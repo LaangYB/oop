@@ -1,13 +1,13 @@
 package week03
 
-fun main(){
+fun main() {
     val e = Employee("Budi")
 
     e.salary = -1000
-    e.salary = 5000000
-    println("gaji: ${e.salary}")
+    e.salary = 5_000_000
+    println("Gaji: ${e.salary}")
 
     e.increasePerformanceRating()
 
-    println("pajak yang harus dibayar: ${e.tax}")
+    println("Pajak yang harus dibayar: ${e.tax}")
 }
