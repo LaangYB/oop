@@ -7,7 +7,6 @@ class Weapon(val name: String) {
             when {
                 value < 0 -> {
                     println("WARNING: Damage tidak boleh negatif! Nilai tidak diubah.")
-                    // tidak mengubah field (tetap nilai lama)
                 }
                 value > 1000 -> {
                     field = 1000
@@ -26,16 +25,30 @@ class Weapon(val name: String) {
         }
 }
 fun main() {
+
+    // ===== TEST WEAPON =====
     val weapon = Weapon("Excalibur")
 
-    // Test 1: Damage negatif (harus gagal)
     weapon.damage = -50
     println("Damage sekarang: ${weapon.damage}")
 
-    // Test 2: Damage terlalu besar (harus jadi 1000)
     weapon.damage = 9999
     println("Damage sekarang: ${weapon.damage}")
 
-    // Print tier
     println("Tier senjata: ${weapon.tier}")
+
+
+    println("\n====================\n")
+
+
+    // ===== TEST PLAYER =====
+    val player = Player("Budi")
+
+    // ❌ Ini harus error kalau di-uncomment
+    // println(player.xp)
+
+    player.addXp(50)   // masih level 1
+    player.addXp(60)   // harus naik ke level 2
+
+    println("Level saat ini: ${player.level}")
 }
