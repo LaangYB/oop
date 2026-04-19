@@ -2,27 +2,47 @@ package week02
 
 import java.util.Scanner
 
-fun main(){
+fun main() {
     val scanner = Scanner(System.`in`)
 
     println("--- APLIKASI PMB UMN ---")
 
-    print("Masukan Nama: ")
+    // Kita butuh input Nama dan NIM dulu sebelum pilih jalur
+    print("Masukkan Nama: ")
     val name = scanner.nextLine()
 
-    print("Masukkan NIM(Wajib 5 Karakter): ")
+    print("Masukkan NIM (5 Karakter): ")
     val nim = scanner.next()
+    scanner.nextLine() // Clear buffer
 
-    scanner.nextLine()
+    if (nim.length != 5) {
+        println("Error: NIM harus 5 karakter!")
+        return // Berhenti jika NIM salah
+    }
 
-    if (nim.length == 5){
-        println("Error: Pendaftaran dibatalkan. NIM harus 5 karakter")
-    } else {
+    println("\nPilih jalur pendaftaran:")
+    println("1. Reguler (Pilih Jurusan)")
+    println("2. Umum (Tanpa Jurusan / Non-Matriculated)")
+    print("Pilihan: ")
+    val type = scanner.nextInt()
+    scanner.nextLine() // Clear buffer
+
+    if (type == 1) {
         print("Masukkan Jurusan: ")
         val major = scanner.nextLine()
 
-        val s1 = Student(name, nim, major)
-        println("status: Pendaftaran selesai.")
+        // Memanggil Primary Constructor
+        val s1 = Student(name = name, nim = nim, major = major)
+        println("Status: Berhasil daftar dijalur Reguler.")
+        println("Terdaftar di: ${s1.major} dengan GPA awal ${s1.gpa}")
+
+    } else if (type == 2) {
+        // Memanggil Secondary Constructor (jalur umum)
+        val s1 = Student(name, nim)
+        println("Status: Berhasil daftar dijalur Umum.")
+        println("Terdaftar sebagai: ${s1.major} dengan GPA awal ${s1.gpa}")
+
+    } else {
+        println("Pilihan ngawur, pendaftaran batal!")
     }
 }
-
