@@ -25,3 +25,17 @@ class Weapon(val name: String) {
             else -> "Common"
         }
 }
+fun main() {
+    val weapon = Weapon("Excalibur")
+
+    // Test 1: Damage negatif (harus gagal)
+    weapon.damage = -50
+    println("Damage sekarang: ${weapon.damage}")
+
+    // Test 2: Damage terlalu besar (harus jadi 1000)
+    weapon.damage = 9999
+    println("Damage sekarang: ${weapon.damage}")
+
+    // Print tier
+    println("Tier senjata: ${weapon.tier}")
+}
