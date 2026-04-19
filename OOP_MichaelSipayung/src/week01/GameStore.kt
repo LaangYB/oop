@@ -4,16 +4,15 @@ fun main() {
     val gameTitle = "Black Myth: Wukong"
     val price = 700000
 
-    val finalPrice = calculateFinalPrice(originalPrice = price)
+
+    val discount = calculateDiscount(price = price)
+    val finalPrice = price - discount
 
     println("=== SteamKW Game Receipt ===")
     println("Judul Game  : $gameTitle")
     println("Harga Asli  : Rp $price")
-    println("Harga Akhir : Rp ${finalPrice.toInt()}")
+    println("Potongan    : Rp $discount")
+    println("Harga Akhir : Rp $finalPrice")
     println("============================")
 }
-
-fun calculateFinalPrice(originalPrice: Int): Double {
-    val discount = if (originalPrice > 500000) 0.20 else 0.10
-    return originalPrice * (1 - discount)
-}
+fun calculateDiscount(price: Int) = if (price > 500000) (price * 0.2).toInt() else (price * 0.1).toInt()
