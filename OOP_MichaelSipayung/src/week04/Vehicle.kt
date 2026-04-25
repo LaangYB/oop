@@ -14,9 +14,3 @@ open class Vehicle(val brand: String) {
         println("Beep! Beep!")
     }
 }
-
-fun main() {
-    val mobil = Vehicle("Toyota")
-    mobil.honk()
-    mobil.accelerate()
-}
