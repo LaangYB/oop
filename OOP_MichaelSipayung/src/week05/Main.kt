@@ -44,16 +44,25 @@ fun main() {
     val myWallet = EWallet(accountName = "Dana User", balance = 50000.0)
     val myCard = CreditCard(accountName = "Platinum Card", limit = 100000.0)
 
-    // 2. Memasukkan keduanya ke dalam List bertipe PaymentMethod (Abstraction)
     val daftarPembayaran: List<PaymentMethod> = listOf(myWallet, myCard)
 
     println("=== SIMULASI TRANSAKSI E-COMMERCE ===")
-    println("Jumlah Transaksi: Rp 75000.0\n")
 
-    // 3. Melakukan perulangan untuk memproses pembayaran
     for (metode in daftarPembayaran) {
-        // Memanggil fungsi yang sama, namun perilakunya akan berbeda (Polymorphism)
+        println("Akun: ${metode.accountName}")
         metode.processPayment(75000.0)
-        println("------------------------------------")
+
+        // --- SMART CASTING CHALLENGE ---
+        if (metode is EWallet) {
+            println("\n[Sistem] Mendeteksi E-Wallet. Mencoba Top Up otomatis...")
+
+            // Kotlin otomatis mengenali 'metode' sebagai EWallet di sini
+            metode.topUp(50000.0)
+
+            println("[Sistem] Mencoba pembayaran ulang...")
+            metode.processPayment(75000.0)
+        }
+
+        println("------------------------------------\n")
     }
 }
