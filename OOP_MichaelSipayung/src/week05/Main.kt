@@ -40,4 +40,20 @@ fun main() {
     // 3. Memanggil hitungLuas dengan satu parameter Double (Lingkaran)
     val luasLingkaran = helper.hitungLuas(7.0)
     println("Luas Lingkaran (jari-jari 7.0): $luasLingkaran")
+
+    val myWallet = EWallet(accountName = "Dana User", balance = 50000.0)
+    val myCard = CreditCard(accountName = "Platinum Card", limit = 100000.0)
+
+    // 2. Memasukkan keduanya ke dalam List bertipe PaymentMethod (Abstraction)
+    val daftarPembayaran: List<PaymentMethod> = listOf(myWallet, myCard)
+
+    println("=== SIMULASI TRANSAKSI E-COMMERCE ===")
+    println("Jumlah Transaksi: Rp 75000.0\n")
+
+    // 3. Melakukan perulangan untuk memproses pembayaran
+    for (metode in daftarPembayaran) {
+        // Memanggil fungsi yang sama, namun perilakunya akan berbeda (Polymorphism)
+        metode.processPayment(75000.0)
+        println("------------------------------------")
+    }
 }
