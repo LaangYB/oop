@@ -94,6 +94,42 @@ fun main() {
 
     println("\n=== SIMULASI SELESAI ===")
 
+    // --- 9. Modifikasi Immutability & Sinyal Event ---
+    println("\n=== UPGRADE DI BLACKSMITH ===")
+
+    // Senjata awal pemain (Pedang Kayu Bapuk)
+    val weaponAwal = Weapon.forgeStarterSword()
+    println("Senjata Sebelum Upgrade: ${weaponAwal.item.name} (Damage: ${weaponAwal.item.damage})")
+
+    /**
+     * Karena GameItem adalah data class dan bersifat immutable (val),
+     * kita tidak bisa mengubah damage-nya secara langsung.
+     * Kita gunakan fungsi copy() untuk membuat instance baru dengan damage yang ditingkatkan.
+     */
+    val upgradedItem = weaponAwal.item.copy(
+        name = "Pedang Kayu Legendaris", // Mengubah nama
+        damage = 25                      // Meningkatkan damage sesuai perintah
+    )
+    println("Senjata Setelah Upgrade: ${upgradedItem.name} (Damage: ${upgradedItem.damage})")
+
+    println("\n=== MENJALANKAN SIMULASI EVENT BERURUTAN ===")
+
+    // 1. Memasuki Zona Aman
+    processEvent(BattleState.SafeZone)
+
+    // 2. Bertemu Monster
+    processEvent(BattleState.MonsterEncounter("Goblin Nakal"))
+
+    // 3. Menemukan Loot (Hasil Upgrade tadi)
+    processEvent(BattleState.LootDropped(upgradedItem))
+
+    // 4. Game Over
+    processEvent(BattleState.GameOver("Terkena jebakan racun"))
+
+    println("\n=== SEMUA TUGAS MANDIRI SELESAI ===")
+
+
+
     println("\n=== STATUS AKHIR ===")
     println("Apakah game masih berjalan? ${GameManager.isGameRunning}")
 
