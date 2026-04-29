@@ -18,13 +18,28 @@ fun main(){
     processCheckout(pay1, 50000.0)
     processCheckout(pay2, 150000.0)
 
-    val lampuKamar = SmartLamp("L001", "Lampu Kamar Utama")
-    lampuKamar.turnOn()
-    lampuKamar.turnOff()
+    val myHub = SmartHomeHub()
+    val lampuRuangTamu = SmartLamp("L-001", "Lampu Ruang Tamu")
+    val speakerGoogle = SmartSpeaker("S-001", "Google Nest Hub")
+    val kameraTeras = SmartCCTV("C-001", "Tapo Camera Outdoor")
+    val kameraDapur = SmartCCTV("C-002", "Ezviz Indoor")
 
-    val mySpeaker = SmartSpeaker("SPK-001", "Google Nest Hub")
+    println("=== PROSES PENDAFTARAN PERANGKAT ===")
+    myHub.addDevice(lampuRuangTamu)
+    myHub.addDevice(speakerGoogle)
+    myHub.addDevice(kameraTeras)
+    myHub.addDevice(kameraDapur)
 
-    mySpeaker.turnOn()
-    mySpeaker.playMusic("Bohemian Rhapsody")
-    mySpeaker.turnOff()
+    println("\n=== MENGAKTIFKAN PERANGKAT ===")
+    lampuRuangTamu.turnOn()
+    speakerGoogle.turnOn()
+    kameraTeras.turnOn()
+
+    println("\n=== TES FITUR SPEAKER ===")
+    speakerGoogle.playMusic("Bohemian Rhapsody")
+
+    myHub.activateSecurityMode()
+    myHub.turnOffAllSwitches()
+
+    println("Simulasi Smart Home Selesai.")
 }
