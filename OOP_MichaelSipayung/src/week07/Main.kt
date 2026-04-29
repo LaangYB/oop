@@ -34,7 +34,14 @@ fun main() {
     val uiMessage = when(response) {
         is ApiResponse.Success -> "Tampilkan: ${response.data}"
         is ApiResponse.Error -> "Munculkan alert: ${response.message}"
-        // Tidak butuh 'else' karena sealed class sudah mencakup semua kemungkinan
+        is ApiResponse.Loading -> "Tampilkan Spinner"
     }
     println(uiMessage)
+
+    val nextResponse: ApiResponse = ApiResponse.Success("Data User ditemukan!")
+    println(when(nextResponse) {
+        is ApiResponse.Success -> "Tampilkan: ${nextResponse.data}"
+        is ApiResponse.Error -> "Munculkan alert: ${nextResponse.message}"
+        is ApiResponse.Loading -> "Tampilkan Spinner"
+    })
 }
