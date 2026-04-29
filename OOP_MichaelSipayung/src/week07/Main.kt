@@ -44,4 +44,39 @@ fun main() {
         is ApiResponse.Error -> "Munculkan alert: ${nextResponse.message}"
         is ApiResponse.Loading -> "Tampilkan Spinner"
     })
+    println("\n=== MENGUJI SINGLETON GAME MANAGER ===")
+    // Panggilan pertama: Game akan mulai
+    GameManager.startGame()
+
+    // Panggilan kedua: Akan tertahan oleh logika Singleton
+    GameManager.startGame()
+
+    println("\n=== SIMULASI PERJALANAN RPG ===")
+
+    // 1. Membuat Senjata menggunakan Factory (Companion Object)
+    val starterSword = Weapon.forgeStarterSword()
+    val legendarySword = Weapon.forgeEpicSword()
+
+    println("Senjata Baru Didapatkan:")
+    starterSword.displayInfo()
+    legendarySword.displayInfo()
+
+    // 2. Daftar Event yang akan terjadi (Sealed Class)
+    val journey = listOf(
+        BattleState.SafeZone,
+        BattleState.MonsterEncounter("Slime Hijau"),
+        BattleState.MonsterEncounter("Ancient Dragon"),
+        BattleState.LootDropped(GameItem("Cincin Keabadian", 0, ItemRarity.LEGENDARY)),
+        BattleState.GameOver("Kelelahan Luar Biasa")
+    )
+
+    // 3. Eksekusi Event menggunakan Executor (Smart Casting & Destructuring)
+    for (event in journey) {
+        processEvent(event)
+    }
+
+    println("\n=== STATUS AKHIR ===")
+    println("Apakah game masih berjalan? ${GameManager.isGameRunning}")
+
+    println("\nSimulasi Week 07 Selesai.")
 }
