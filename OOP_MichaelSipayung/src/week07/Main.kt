@@ -75,6 +75,25 @@ fun main() {
         processEvent(event)
     }
 
+    // --- 8. Simulasi Factory & Enum ---
+    println("\n=== PENGECEKAN TINGKAT KELANGKAAN ===")
+
+    // Mengakses nilai drop chance langsung dari Enum
+    val legendaryChance = ItemRarity.LEGENDARY.dropChance
+    println("Info Sistem: Item LEGENDARY hanya memiliki peluang drop sebesar $legendaryChance%.")
+
+    println("\n=== PEMBUATAN SENJATA AWAL ===")
+
+    // Menggunakan Factory Method untuk instansiasi senjata
+    val playerWeapon = Weapon.forgeStarterSword()
+
+    // Mencetak detail senjata yang dihasilkan oleh Factory
+    println("Senjata Diterima: ${playerWeapon.item.name}")
+    println("Statistik: Damage ${playerWeapon.item.damage}, Durability ${playerWeapon.durability}")
+    println("Kelangkaan: ${playerWeapon.item.rarity} (Drop Chance: ${playerWeapon.item.rarity.dropChance}%)")
+
+    println("\n=== SIMULASI SELESAI ===")
+
     println("\n=== STATUS AKHIR ===")
     println("Apakah game masih berjalan? ${GameManager.isGameRunning}")
 
