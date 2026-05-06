@@ -1,4 +1,4 @@
-package week11.michael.id.ac.umn;
+package week11
 
 import java.util.ArrayList;
 import java.util.Scanner;
